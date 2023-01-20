@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class ChatRoomDto {
 
     private String name;
+    private String roomId;
 }

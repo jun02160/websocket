@@ -1,3 +1,4 @@
+/*
 package jjun.server.websocket.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,3 +29,4 @@ public class WebSockChatHandler extends TextWebSocketHandler {
         room.handlerActions(session, chatMessage, chatService);
     }
 }
+*/

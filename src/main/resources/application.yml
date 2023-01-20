@@ -6,3 +6,12 @@ server:
       charset: UTF-8
       enabled: true
       force: true
+
+spring:
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: false
+  freemarker:
+    cache: false
