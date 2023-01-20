@@ -44,8 +44,9 @@ dependencies {
 
 	implementation 'com.google.code.gson:gson:2.8.9'
 
-	implementation 'io.jsonwebtoken:jjwt:0.9.1'
-
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'

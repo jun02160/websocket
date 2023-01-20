@@ -19,11 +19,12 @@ public class TokenProvider {
     // 이름으로 JWT 토큰 생성
     public String generateToken(String name) {
         Date now = new Date();
+        log.info("Token 발급 이전");
         return Jwts.builder()
                 .setId(name)
                 .setIssuedAt(now)  // 토큰 발행일자
                 .setExpiration(new Date(now.getTime() + tokenValidMilisecond))  // 토큰 만료시간
-                .signWith(SignatureAlgorithm.HS256, secretKey)  // 암호화 알고리즘을 이용하여 Secret 값 셋팅
+                .signWith(SignatureAlgorithm.HS512, secretKey)  // 암호화 알고리즘을 이용하여 Secret 값 셋팅
                 .compact();
     }
 
@@ -39,7 +40,9 @@ public class TokenProvider {
 
     private Jws<Claims> getClaims(String jwt) {
         try {
-            return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwt);
+            return Jwts.parser()
+                    .setSigningKey(secretKey)
+                    .parseClaimsJws(jwt);
         } catch (SignatureException e) {
             log.error("잘못된 JWT 서명입니다.");
             throw e;
