@@ -23,7 +23,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class ChatController {
 
     private final SimpMessageSendingOperations messagingTemplate;
-    private final ChatService chatService;
+//    private final ChatService chatService;
 
     @MessageMapping("/chat/message")
     public void message(ChatMessage message) {
@@ -34,7 +34,7 @@ public class ChatController {
         messagingTemplate.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
     }
 
-    @RequestMapping(value = "/chat", method = POST)
+    /*@RequestMapping(value = "/chat", method = POST)
     public ChatRoom createRoom(@RequestBody ChatRoomDto roomDto) {
         return chatService.createRoom(roomDto.getName());
     }
@@ -42,5 +42,5 @@ public class ChatController {
     @RequestMapping(value = "/chat", method = GET)
     public List<ChatRoom> findAllRoom() {
         return chatService.findAllRoom();
-    }
+    }*/
 }
