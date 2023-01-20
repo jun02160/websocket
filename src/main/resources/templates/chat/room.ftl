@@ -23,7 +23,7 @@
         <div class="input-group-prepend">
             <label class="input-group-text">방제목</label>
         </div>
-        <input type="text" class="form-control" v-model="room_name" @keyup.enter="createRoom">
+        <input type="text" class="form-control" v-model="room_name" v-on:keyup.enter="createRoom">
         <div class="input-group-append">
             <button class="btn btn-primary" type="button" @click="createRoom">채팅방 개설</button>
         </div>
@@ -37,8 +37,6 @@
 <!-- JavaScript -->
 <script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
 <script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
-<script src="/webjars/bootstrap/4.3.1/dist/js/bootstrap.min.js"></script>
-<script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
 <script>
     var vm = new Vue({
         el: '#app',
@@ -74,9 +72,11 @@
             },
             enterRoom: function(roomId) {
                 var sender = prompt('대화명을 입력해 주세요.');
-                localStorage.setItem('wschat.sender',sender);
-                localStorage.setItem('wschat.roomId',roomId);
-                location.href="/chat/room/enter/"+roomId;
+                if(sender != "") {
+                    localStorage.setItem('wschat.sender',sender);
+                    localStorage.setItem('wschat.roomId',roomId);
+                    location.href="/chat/room/enter/"+roomId;
+                }
             }
         }
     });

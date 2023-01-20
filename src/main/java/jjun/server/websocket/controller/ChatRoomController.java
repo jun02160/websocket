@@ -1,9 +1,13 @@
 package jjun.server.websocket.controller;
 
 import jjun.server.websocket.dto.ChatRoom;
+import jjun.server.websocket.jwt.LoginInfo;
+import jjun.server.websocket.jwt.TokenProvider;
 import jjun.server.websocket.repository.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +21,7 @@ import java.util.List;
 public class ChatRoomController {
 
     private final ChatRoomRepository chatRoomRepository;
+    private final TokenProvider tokenProvider;
 
     @GetMapping("/room")
     public String rooms(Model model) {
@@ -49,8 +54,6 @@ public class ChatRoomController {
      */
     @GetMapping("/room/enter/{roomId}")
     public String roomDetail(Model model, @PathVariable String roomId) {
-        /*ChatRoom room = chatRoomRepository.findRoomById(roomId);
-        model.addAttribute("room", room);*/
         model.addAttribute("roomId", roomId);
         return "/chat/roomdetail";
     }
@@ -63,5 +66,19 @@ public class ChatRoomController {
     public ChatRoom roomInfo(@PathVariable String roomId) {
         log.info("# Get Chat Room, roomId: {}", roomId);
         return chatRoomRepository.findRoomById(roomId);
+    }
+
+    /**
+     * 회원 정보 조회
+     */
+    @GetMapping("/user")
+    @ResponseBody
+    public LoginInfo getUserInfo() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        return LoginInfo.builder()
+                .name(name)
+                .token(tokenProvider.generateToken(name))
+                .build();
     }
 }
