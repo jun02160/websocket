@@ -25,9 +25,12 @@ public class ChatController {
     @MessageMapping("/chat/message")
     public void message(ChatMessage message) {
         if (ChatMessage.MessageType.ENTER.equals(message.getType())) {
+            chatRoomRepository.enterChatRoom(message.getRoomId());
             message.setMessage(message.getSender() + "님이 입장하셨습니다.");
             log.info(message.getSender() + "님이 입장하셨습니다.");
         }
+
+        log.info("Topic 가져오기: {}", chatRoomRepository.getTopic(message.getRoomId()));
         // WebSocket 에서 발행된 메시지 -> Redis로 발행(publish)
         redisPublisher.publish(chatRoomRepository.getTopic(message.getRoomId()), message);
     }
