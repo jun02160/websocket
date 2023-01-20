@@ -1,12 +1,9 @@
 package jjun.server.websocket.controller;
 
 import jjun.server.websocket.dto.ChatRoom;
-import jjun.server.websocket.dto.ChatRoomDto;
 import jjun.server.websocket.repository.ChatRoomRepository;
-import jjun.server.websocket.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

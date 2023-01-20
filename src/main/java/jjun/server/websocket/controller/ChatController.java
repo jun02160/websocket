@@ -1,20 +1,14 @@
 package jjun.server.websocket.controller;
 
 import jjun.server.websocket.dto.ChatMessage;
-import jjun.server.websocket.dto.ChatRoomDto;
-import jjun.server.websocket.service.ChatService;
-import jjun.server.websocket.dto.ChatRoom;
+import jjun.server.websocket.repository.ChatRoomRepository;
+
+import jjun.server.websocket.service.RedisPublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -22,16 +16,20 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 //@Controller
 public class ChatController {
 
-    private final SimpMessageSendingOperations messagingTemplate;
-//    private final ChatService chatService;
+    private final RedisPublisher redisPublisher;
+    private final ChatRoomRepository chatRoomRepository;
 
+    /**
+     * WebSocket "/pub/chat/message" 로 들어오는 메시징 처리
+     */
     @MessageMapping("/chat/message")
     public void message(ChatMessage message) {
         if (ChatMessage.MessageType.ENTER.equals(message.getType())) {
             message.setMessage(message.getSender() + "님이 입장하셨습니다.");
             log.info(message.getSender() + "님이 입장하셨습니다.");
         }
-        messagingTemplate.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
+        // WebSocket 에서 발행된 메시지 -> Redis로 발행(publish)
+        redisPublisher.publish(chatRoomRepository.getTopic(message.getRoomId()), message);
     }
 
     /*@RequestMapping(value = "/chat", method = POST)

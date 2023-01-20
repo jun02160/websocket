@@ -3,7 +3,6 @@ package jjun.server.websocket.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jjun.server.websocket.dto.ChatRoom;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -12,7 +11,7 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.*;
 
-@Slf4j
+//@Slf4j
 @RequiredArgsConstructor
 @Service
 public class ChatService {
@@ -42,7 +41,7 @@ public class ChatService {
      * **ID는 식별자로, 조회 시 사용
      */
 
-    public ChatRoom createRoom(String name) {
+    /*public ChatRoom createRoom(String name) {
         String randomId = UUID.randomUUID().toString();
         ChatRoom chatRoom = ChatRoom.builder()
                 .roomId(randomId)
@@ -50,7 +49,7 @@ public class ChatService {
                 .build();
         chatRooms.put(randomId, chatRoom);   // 채팅방 리스트에 새로 개설한 채팅방 추가
         return chatRoom;
-    }
+    }*/
 
     /*
      * 메시지 발송 - 지정한 웹 소켓 세션으로 메시지 발송
@@ -61,7 +60,7 @@ public class ChatService {
         try {
             session.sendMessage(new TextMessage(objectMapper.writeValueAsString(message)));
         } catch (IOException e) {
-            log.error(e.getMessage(), e);
+//            log.info(e.getMessage(), e);
         }
     }
 }
