@@ -23,6 +23,7 @@ repositories {
 dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 	implementation 'org.springframework.boot:spring-boot-devtools'
@@ -42,6 +43,8 @@ dependencies {
 	implementation 'org.webjars:stomp-websocket:2.3.3'
 
 	implementation 'com.google.code.gson:gson:2.8.9'
+
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
