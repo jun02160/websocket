@@ -71,7 +71,7 @@ public class StompHandler implements ChannelInterceptor {
 
             // 클라이언트의 퇴장 메시지 채팅방에 발송 -> 이후 퇴장한 클라이언트의 roomId 매핑 정보 삭제 : Redis Publish
             String name = Optional.ofNullable((Principal) message.getHeaders().get("simpUser")).map(Principal::getName).orElse("UnknownUser");
-            chatService.removeUserEnterInfo(sessionId);
+            chatRoomRepository.removeUserEnterInfo(sessionId);
             log.info("DISCONNECTED {}, {}", sessionId, roomId);
 
         }
