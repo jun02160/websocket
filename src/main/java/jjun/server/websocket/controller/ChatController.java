@@ -37,7 +37,7 @@ public class ChatController {
         // 채팅방 입장 시, 대화명과 메시지 자동 세팅
         if (ChatMessage.MessageType.ENTER.equals(message.getType())) {
             message.setSender("[알림]");
-            message.setMessage(message.getSender() + "님이 입장하셨습니다.");
+            message.setMessage(nickname + "님이 입장하셨습니다.");
             log.info(nickname + "님이 입장하셨습니다.");
         }
 
