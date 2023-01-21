@@ -38,7 +38,7 @@ public class ChatRoomController {
     public List<ChatRoom> room() {
         log.info("# All Chat Rooms");
         List<ChatRoom> chatRooms = chatRoomRepository.findAllRoom();
-        chatRooms.stream().forEach(
+        chatRooms.forEach(
                 room -> room.setUserCount(chatRoomRepository.getUserCount(room.getRoomId()))
         );
         return chatRooms;

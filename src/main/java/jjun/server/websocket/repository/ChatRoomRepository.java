@@ -79,27 +79,26 @@ public class ChatRoomRepository {
     /**
      * 채팅방 유저 수 조회
      */
-    public int getUserCount(String roomId) {
-        return Integer.parseInt(Optional.ofNullable(valueOps.get(USER_COUNT + "_" + roomId)).orElse("0"));
+    public long getUserCount(String roomId) {
+        return Long.valueOf(Optional.ofNullable(valueOps.get(USER_COUNT + "_" + roomId)).orElse("0"));
     }
 
     /**
      * 채팅방에 새로운 유저가 입장한 경우 => 인원 수 +1
-     * // TODO 인원 수 타입 long VS int
      */
-    public int plusUserCount(String roomId) {
-        return Integer.parseInt(String.valueOf(Optional.ofNullable(
+    public long plusUserCount(String roomId) {
+        return Optional.ofNullable(
                 valueOps.increment(USER_COUNT + "_" + roomId)
-        ).orElse(0L)));
+        ).orElse(0L);
     }
 
     /**
      * 채팅방에서 유저가 퇴장한 경우 => 인원 수 -1
      */
-    public int minusUserCount(String roomId) {
-        return Integer.parseInt(String.valueOf(Optional.ofNullable(
+    public long minusUserCount(String roomId) {
+        return Optional.ofNullable(
                 valueOps.decrement(USER_COUNT + "_" + roomId)
-        ).filter(count -> count > 0).orElse(0L)));
+        ).filter(count -> count > 0).orElse(0L);
     }
 
 }

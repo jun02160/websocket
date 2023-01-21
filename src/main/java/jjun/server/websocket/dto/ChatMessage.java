@@ -20,7 +20,7 @@ public class ChatMessage {
     }
 
     @Builder
-    public ChatMessage(MessageType type, String roomId, String sender, String message, int userCount) {
+    public ChatMessage(MessageType type, String roomId, String sender, String message, long userCount) {
         this.type = type;
         this.roomId = roomId;
         this.sender = sender;
@@ -36,6 +36,6 @@ public class ChatMessage {
     private String roomId;   // 방 번호
     private String sender;   // 발신자
     private String message;  // 메시지 데이터
-    private int userCount;  // 채팅방 인원 수: 채팅방 내에서 메시지가 전달될 때 인원 수 갱신
+    private long userCount;  // 채팅방 인원 수: 채팅방 내에서 메시지가 전달될 때 인원 수 갱신
 }
 

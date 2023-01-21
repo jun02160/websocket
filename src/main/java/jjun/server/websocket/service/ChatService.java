@@ -54,7 +54,7 @@ public class ChatService {
      * TALK 상태일 때 실행
      */
 
-    public <T> void sendChatMessage(ChatMessage message) {
+    public void sendChatMessage(ChatMessage message) {
         message.setUserCount(chatRoomRepository.getUserCount(message.getRoomId()));
 
         if (ChatMessage.MessageType.ENTER.equals(message.getType())) {
@@ -66,6 +66,7 @@ public class ChatService {
             message.setMessage(message.getSender() + "님이 방에서 나갔습니다.");
             message.setSender("[알림]");
         }
+        redisTemplate.convertAndSend(channelTopic.getTopic(), message);
     }
 }
 
