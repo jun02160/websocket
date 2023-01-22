@@ -55,7 +55,7 @@ public class ChatService {
      */
 
     public void sendChatMessage(ChatMessageSaveDto message) {
-        message.setUserCount(chatRoomRepository.getUserCount(message.getRoomId()));
+//        message.setUserCount(chatRoomRepository.getUserCount(message.getRoomId()));
 
         if (ChatMessageSaveDto.MessageType.ENTER.equals(message.getType())) {
             log.info(message.getSender() + "님이 방에 입장했습니다");

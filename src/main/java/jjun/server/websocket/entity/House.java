@@ -1,18 +1,12 @@
 package jjun.server.websocket.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
-import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @Table(name = "house")
@@ -20,7 +14,7 @@ import static javax.persistence.CascadeType.ALL;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class House extends BaseTimeEntity {
+public class House {
 
     @Id
     @Column(name = "house_id")

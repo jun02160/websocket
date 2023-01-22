@@ -1,3 +1,4 @@
+/*
 package jjun.server.websocket.controller;
 
 import jjun.server.websocket.entity.ChatRoom;
@@ -29,10 +30,12 @@ public class ChatRoomController {
         return "/chat/room";
     }
 
-    /**
+    */
+/**
      * 모든 채팅방 리스트 조회
      * -> 이때 userCount 정보 세팅
-     */
+     *//*
+
     @GetMapping("/rooms")
     @ResponseBody
     public List<ChatRoom> room() {
@@ -44,9 +47,11 @@ public class ChatRoomController {
         return chatRooms;
     }
 
-    /**
+    */
+/**
      * 채팅방 개설
-     */
+     *//*
+
     @PostMapping("/room")
     @ResponseBody
     public ChatRoom createRoom(@RequestParam String name) {
@@ -54,18 +59,22 @@ public class ChatRoomController {
         return chatRoomRepository.createChatRoom(name);
     }
 
-    /**
+    */
+/**
      * 채팅방 입장 화면
-     */
+     *//*
+
     @GetMapping("/room/enter/{roomId}")
     public String roomDetail(Model model, @PathVariable String roomId) {
         model.addAttribute("roomId", roomId);
         return "/chat/roomdetail";
     }
 
-    /**
+    */
+/**
      * 툭정 채팅방 조회
-     */
+     *//*
+
     @GetMapping("/room/{roomId}")
     @ResponseBody
     public ChatRoom roomInfo(@PathVariable String roomId) {
@@ -73,9 +82,11 @@ public class ChatRoomController {
         return chatRoomRepository.findRoomById(roomId);
     }
 
-    /**
+    */
+/**
      * 회원 정보 조회
-     */
+     *//*
+
     @GetMapping("/user")
     @ResponseBody
     public LoginInfo getUserInfo() {
@@ -90,4 +101,4 @@ public class ChatRoomController {
                 .token(token)
                 .build();
     }
-}
+}*/

@@ -48,28 +48,28 @@ public class ChatRoomRepository {
         hashOpsChatRoom = roomRedisTemplate.opsForHash();
     }
 
-    /**
+   /* *//**
      * 모든 채팅방 조회
-     */
+     *//*
     public List<ChatRoom> findAllRoom() {
         return hashOpsChatRoom.values(CHAT_ROOMS);
     }
 
-    /**
+    *//**
      * 특정 채팅방 조회
-     */
+     *//*
     public ChatRoom findRoomById(String id) {
         return hashOpsChatRoom.get(CHAT_ROOMS, id);
     }
 
-    /**
+    *//**
      * 채팅방 생성 : 서버 간 채팅방 공유를 위해 Redis hash 에 저장한다.
-     */
+     *//*
     public ChatRoom createChatRoom(String name) {
         ChatRoom chatRoom = ChatRoom.create(name);
         hashOpsChatRoom.put(CHAT_ROOMS, chatRoom.getRoomId(), chatRoom);
         return chatRoom;
-    }
+    }*/
 
     /**
      * 유저가 입장한 채팅방 정보(roomId)와 유저 세션 정보(sessionId) 매핑하여 저장
@@ -140,9 +140,9 @@ public class ChatRoomRepository {
     /**
      * 채팅방 유저 수 조회
      */
-    public long getUserCount(String roomId) {
+    /*public long getUserCount(String roomId) {
         return Long.valueOf(Optional.ofNullable(valueOps.get(USER_COUNT + "_" + roomId)).orElse("0"));
-    }
+    }*/
 /*
 
     */

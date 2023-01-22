@@ -140,7 +140,7 @@ public class ChatRedisCacheService {
      * 프로필 닉네임 수정 시, 변경 사항 Redis 캐시에도 저장
      */
     public void changeUserCachingNickname(String username, String changeNickname) {
-        roomRedisTemplate.opsForHash().put(USERNAME_NICKNAME, username);
+        roomRedisTemplate.opsForHash().put(USERNAME_NICKNAME, username, changeNickname);
     }
 
     /**

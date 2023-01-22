@@ -108,7 +108,7 @@ public class StompHandler implements ChannelInterceptor {
                             .get(SIMP_SESSION_ID)).orElse(null);
             String roomId = chatRoomService.disconnectWebSocket(sessionId);
 
-            chatRoomRepository.minusUserCount(roomId);  // 인원 수 -1
+//            chatRoomRepository.minusUserCount(roomId);  // 인원 수 -1
 
             redisPublisher.publish(topic,
                     ChatMessageSaveDto.builder()
