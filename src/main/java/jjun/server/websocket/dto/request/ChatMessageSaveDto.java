@@ -1,8 +1,9 @@
-package jjun.server.websocket.dto;
+package jjun.server.websocket.dto.request;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import jjun.server.websocket.dto.ChatRoom;
+import lombok.*;
+
+import java.util.List;
 
 /**
  * 채팅 메시지 타입 : 채팅방 입장(ENTER), 대화하기(TALK), 퇴장(QUIT)
@@ -13,20 +14,11 @@ import lombok.Setter;
  * => 인원 수 표시 가능, 입장/퇴장 알림 서버에서 처리 가능
  */
 @Getter @Setter
-public class ChatMessage {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ChatMessageSaveDto {
 
-    public ChatMessage() {
-
-    }
-
-    @Builder
-    public ChatMessage(MessageType type, String roomId, String sender, String message, long userCount) {
-        this.type = type;
-        this.roomId = roomId;
-        this.sender = sender;
-        this.message = message;
-        this.userCount = userCount;
-    }
 
     public enum MessageType {
         ENTER, TALK, QUIT
@@ -36,6 +28,10 @@ public class ChatMessage {
     private String roomId;   // 방 번호
     private String sender;   // 발신자
     private String message;  // 메시지 데이터
+    private String createdAt; // 발신일자
+    private List<String> userList;
     private long userCount;  // 채팅방 인원 수: 채팅방 내에서 메시지가 전달될 때 인원 수 갱신
+
+    public static ChatMessageSaveDto of(ChatRoom)
 }
 

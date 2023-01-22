@@ -1,6 +1,6 @@
 package jjun.server.websocket.service;
 
-import jjun.server.websocket.dto.ChatMessage;
+import jjun.server.websocket.dto.request.ChatMessageSaveDto;
 import jjun.server.websocket.repository.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -54,14 +54,14 @@ public class ChatService {
      * TALK 상태일 때 실행
      */
 
-    public void sendChatMessage(ChatMessage message) {
+    public void sendChatMessage(ChatMessageSaveDto message) {
         message.setUserCount(chatRoomRepository.getUserCount(message.getRoomId()));
 
-        if (ChatMessage.MessageType.ENTER.equals(message.getType())) {
+        if (ChatMessageSaveDto.MessageType.ENTER.equals(message.getType())) {
             log.info(message.getSender() + "님이 방에 입장했습니다");
             message.setMessage(message.getSender() + "님이 방에 입장했습니다");
             message.setSender("[알림]");
-        } else if (ChatMessage.MessageType.QUIT.equals(message.getType())) {
+        } else if (ChatMessageSaveDto.MessageType.QUIT.equals(message.getType())) {
             log.info(message.getSender() + "님이 방에서 나갔습니다.");
             message.setMessage(message.getSender() + "님이 방에서 나갔습니다.");
             message.setSender("[알림]");

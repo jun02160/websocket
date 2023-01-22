@@ -1,6 +1,6 @@
 package jjun.server.websocket.service;
 
-import jjun.server.websocket.dto.ChatMessage;
+import jjun.server.websocket.dto.request.ChatMessageSaveDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
@@ -18,7 +18,7 @@ public class RedisPublisher {
 
     private final RedisTemplate<String, Object> redisTemplate;
 
-    public void publish(ChannelTopic topic, ChatMessage message) {
+    public void publish(ChannelTopic topic, ChatMessageSaveDto message) {
         redisTemplate.convertAndSend(topic.getTopic(), message);
     }
 }

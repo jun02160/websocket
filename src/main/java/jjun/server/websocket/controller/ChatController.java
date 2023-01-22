@@ -1,14 +1,12 @@
 package jjun.server.websocket.controller;
 
-import jjun.server.websocket.dto.ChatMessage;
+import jjun.server.websocket.dto.request.ChatMessageSaveDto;
 import jjun.server.websocket.jwt.TokenProvider;
 
 import jjun.server.websocket.repository.ChatRoomRepository;
 import jjun.server.websocket.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
@@ -31,7 +29,7 @@ public class ChatController {
      * WebSocket "/pub/chat/message" 로 들어오는 메시징 처리
      */
     @MessageMapping("/chat/message")
-    public void message(ChatMessage message, @Header("token") String token) {
+    public void message(ChatMessageSaveDto message, @Header("token") String token) {
 
         String nickname = tokenProvider.getUserNameFromJwt(token);
         message.setSender(nickname);         // 로그인 회원 정보로 대화명 설정

@@ -1,15 +1,11 @@
 package jjun.server.websocket.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jjun.server.websocket.dto.ChatMessage;
+import jjun.server.websocket.dto.request.ChatMessageSaveDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.connection.Message;
-import org.springframework.data.redis.connection.MessageListener;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
-import redis.embedded.Redis;
 
 /**
  * Redis 구독 서비스
@@ -32,9 +28,9 @@ public class RedisSubscriber {
     public void sendMessage(String publishMessage) {
         try {
             // ChatMessage 객체로 매핑
-            ChatMessage chatMessage = objectMapper.readValue(publishMessage, ChatMessage.class);
+            ChatMessageSaveDto chatMessageSaveDto = objectMapper.readValue(publishMessage, ChatMessageSaveDto.class);
             // WebSocket 구독자에게 채팅 메시지 Send
-            messagingTemplate.convertAndSend("/sub/chat/room/" + chatMessage.getRoomId(), chatMessage);
+            messagingTemplate.convertAndSend("/sub/chat/room/" + chatMessageSaveDto.getRoomId(), chatMessageSaveDto);
         } catch (Exception e) {
             log.error("Exception {}", e);
         }
