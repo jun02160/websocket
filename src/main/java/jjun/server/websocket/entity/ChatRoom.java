@@ -1,7 +1,6 @@
-package jjun.server.websocket.dto;
+package jjun.server.websocket.entity;
 
 import jjun.server.websocket.dto.request.ChatMessageSaveDto;
-import jjun.server.websocket.entity.House;
 import lombok.*;
 
 import javax.persistence.*;

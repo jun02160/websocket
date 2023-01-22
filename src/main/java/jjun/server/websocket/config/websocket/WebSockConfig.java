@@ -1,4 +1,4 @@
-package jjun.server.websocket.config;
+package jjun.server.websocket.config.websocket;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;

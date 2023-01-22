@@ -1,7 +1,8 @@
-package jjun.server.websocket.service;
+package jjun.server.websocket.utils.scheduler;
 
 import jjun.server.websocket.dto.request.ChatMessageSaveDto;
 import jjun.server.websocket.entity.House;
+import jjun.server.websocket.repository.ChatJdbcRepository;
 import jjun.server.websocket.repository.HouseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package jjun.server.websocket.service;
+package jjun.server.websocket.service.chat;
 
 import jjun.server.websocket.dto.request.ChatMessageSaveDto;
 import jjun.server.websocket.repository.ChatRoomRepository;

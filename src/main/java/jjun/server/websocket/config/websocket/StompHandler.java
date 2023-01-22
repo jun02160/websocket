@@ -1,10 +1,10 @@
-package jjun.server.websocket.config;
+package jjun.server.websocket.config.websocket;
 
 import jjun.server.websocket.dto.request.ChatMessageSaveDto;
 import jjun.server.websocket.jwt.TokenProvider;
 import jjun.server.websocket.repository.ChatRoomRepository;
-import jjun.server.websocket.service.ChatService;
-import jjun.server.websocket.service.RedisPublisher;
+import jjun.server.websocket.service.chat.ChatService;
+import jjun.server.websocket.service.redis.RedisPublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.listener.ChannelTopic;

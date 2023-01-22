@@ -1,6 +1,6 @@
 package jjun.server.websocket.controller;
 
-import jjun.server.websocket.dto.ChatRoom;
+import jjun.server.websocket.entity.ChatRoom;
 import jjun.server.websocket.jwt.LoginInfo;
 import jjun.server.websocket.jwt.TokenProvider;
 import jjun.server.websocket.repository.ChatRoomRepository;

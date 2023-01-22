@@ -1,4 +1,4 @@
-package jjun.server.websocket.service;
+package jjun.server.websocket.service.redis;
 
 import jjun.server.websocket.dto.request.ChatMessageSaveDto;
 import lombok.RequiredArgsConstructor;

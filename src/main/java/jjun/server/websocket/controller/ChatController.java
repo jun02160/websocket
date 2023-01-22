@@ -4,7 +4,7 @@ import jjun.server.websocket.dto.request.ChatMessageSaveDto;
 import jjun.server.websocket.jwt.TokenProvider;
 
 import jjun.server.websocket.repository.ChatRoomRepository;
-import jjun.server.websocket.service.ChatService;
+import jjun.server.websocket.service.chat.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.Header;

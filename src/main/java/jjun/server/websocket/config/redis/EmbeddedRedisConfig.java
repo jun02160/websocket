@@ -1,4 +1,4 @@
-package jjun.server.websocket.config;
+package jjun.server.websocket.config.redis;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

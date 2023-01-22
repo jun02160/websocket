@@ -1,6 +1,6 @@
 package jjun.server.websocket.dto.request;
 
-import jjun.server.websocket.dto.ChatRoom;
+import jjun.server.websocket.entity.ChatRoom;
 import lombok.*;
 
 import java.util.List;

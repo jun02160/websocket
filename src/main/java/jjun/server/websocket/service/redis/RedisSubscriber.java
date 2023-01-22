@@ -1,4 +1,4 @@
-package jjun.server.websocket.service;
+package jjun.server.websocket.service.redis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jjun.server.websocket.dto.request.ChatMessageSaveDto;
