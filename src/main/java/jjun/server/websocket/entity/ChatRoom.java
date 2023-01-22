@@ -27,11 +27,14 @@ public class ChatRoom implements Serializable {
     @Id
     private Long id;
 
-    @Column
-    private String roomId;
+//    @Column
+//    private String roomId;
 
     @Column
     private String message;
+
+    @Column
+    private String users;
 
     @Column
     private String createdAt;
@@ -46,14 +49,9 @@ public class ChatRoom implements Serializable {
         return ChatRoom.builder()
                 .message(chatMessageSaveDto.getMessage())
                 .createdAt(chatMessageSaveDto.getCreatedAt())
+                .users(chatMessageSaveDto.getSender())
                 .house(house)
                 .build();
-    }
-    public static ChatRoom create(String name) {
-        ChatRoom chatRoom = new ChatRoom();
-        chatRoom.roomId = UUID.randomUUID().toString();
-//        chatRoom.name = name;
-        return chatRoom;
     }
 }
 

@@ -3,6 +3,7 @@ package jjun.server.websocket.jwt;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -59,5 +60,12 @@ public class TokenProvider {
             log.error("JWT 클레임이 비어있습니다.");
             throw e;
         }
+    }
+
+    public String extract(String header) {
+        if (header == null || header.equals("") || header.length() < 7) {  // TODO 7은 'Bearer ' 길이를 의미하고, 이를 대체할 수 있는 메서드가 분명 있을 거야
+            throw new AuthenticationServiceException("올바른 JWT 정보가 아닙니다.");
+        }
+        return header.substring(7);
     }
 }
