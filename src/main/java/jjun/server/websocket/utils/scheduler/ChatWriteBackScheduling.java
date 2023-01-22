@@ -1,8 +1,10 @@
 package jjun.server.websocket.utils.scheduler;
 
 import jjun.server.websocket.dto.request.ChatMessageSaveDto;
+import jjun.server.websocket.entity.ChatRoom;
 import jjun.server.websocket.entity.House;
 import jjun.server.websocket.repository.ChatJdbcRepository;
+import jjun.server.websocket.repository.ChatRepository;
 import jjun.server.websocket.repository.HouseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,9 +28,10 @@ import java.util.List;
 @Slf4j
 public class ChatWriteBackScheduling {
 
-    private final RedisTemplate<String, Object> chatJdbcRepository;
+    private final RedisTemplate<String, Object> redisTemplate;
     private final RedisTemplate<String, ChatMessageSaveDto> chatRedisTemplate;
 
+    private final ChatRepository chatRepository;
     private final ChatJdbcRepository chatJdbcRepository;
     private final HouseRepository houseRepository;
 
@@ -41,20 +44,21 @@ public class ChatWriteBackScheduling {
         BoundZSetOperations<String, ChatMessageSaveDto> setOperations = chatRedisTemplate.boundZSetOps("NEW_CHAT");
         ScanOptions scanOptions = ScanOptions.scanOptions().build();
 
-        List<Chat> chatList = new ArrayList<>();
+        List<ChatRoom> chatList = new ArrayList<>();
         try (Cursor<ZSetOperations.TypedTuple<ChatMessageSaveDto>> cursor = setOperations.scan(scanOptions)) {
             while (cursor.hasNext()) {
                 ZSetOperations.TypedTuple<ChatMessageSaveDto> chatMessageDto = cursor.next();
 
-                House house = houseRepository.findById(Long.parseLong(chatMessageDto.getValue().getRoomId()));
+                House house = houseRepository.findById(Long.parseLong(chatMessageDto.getValue().getRoomId())).orElse(null);
 
-                if (workSpace == null) {
+                if (house == null) {
                     continue;
                 }
 
-                chatList.add(ChatRoom.of(chatMessageDto.getValue(), workSpace));
+                chatList.add(ChatRoom.of(chatMessageDto.getValue(), house));
             }
             chatJdbcRepository.batchInsertRoomInventories(chatList);
+            redisTemplate.delete("NEW_CHAT");
 
         } catch (Exception e) {
             log.error(e.getMessage());
